@@ -6,11 +6,18 @@ func_commit()
 {
 echo "commit: "
 read mymessage
+<<<<<<< HEAD
 if [ $mymessage = 'exit' ]
 then
 	git reset HEAD
 	exit
 elif [$mymessage = 'skip' ]
+=======
+if [ $mymessage = 'EXIT' ]
+then
+	exit
+elif [$mymessage = 'SKIP' ]
+>>>>>>> 7995b5a5e811c1ecf30c078f279436f81bcfca0c
 then
 	echo You can only skip the \'git add\' stage
 	echo Your message will now be taken word-for-word
