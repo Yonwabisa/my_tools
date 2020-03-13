@@ -6,19 +6,29 @@ func_commit()
 {
 echo "commit: "
 read mymessage
+if [ $mymessage = 'exit' ]
+then
+	git reset HEAD
+	exit
+elif [$mymessage = 'skip' ]
+then
+	echo You can only skip the \'git add\' stage
+	echo Your message will now be taken word-for-word
+	read mymessage
+fi
 git commit -m "$mymessage"
 }
 
 func_add()
 {
-echo "\a\nYou can type \"${GREEN}SKIP${DULL}\" to move on to the commit stage"
-echo "Or you can type \"${CYAN}EXIT${DULL}\" to exit the script\n"
+echo "\a\nYou can type \"${GREEN}skip${DULL}\" to move on to the commit stage"
+echo "Or you can type \"${CYAN}exit${DULL}\" to exit the script\n"
 echo git add: 
 read myfile
-if [ $myfile = 'SKIP' ]
+if [ $myfile = 'skip' ]
 then
 	func_commit
-elif [ $myfile = 'EXIT' ]
+elif [ $myfile = 'exit' ]
 then
 	exit
 else
@@ -29,6 +39,8 @@ fi
 
 clear
 
+date
+pwd
 ls -a -l
 
 git status
@@ -50,5 +62,6 @@ then
 elif [ $myconfirmation = 'n' ] || [ $myconfirmation = 'N' ] || [ $myconfirmation = 'no' ] || [ $myconfirmation = 'No' ]
 then
 		echo "not pushed\n"
-		git reset $myfile
+		git reset --soft HEAD^ 		#REMOVES COMMIT MESSAGE
+		git reset HEAD			#UNSTAGES (REMOVES FILE FROM HEAD INDEX)
 fi
