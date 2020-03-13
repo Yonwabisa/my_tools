@@ -18,6 +18,9 @@ read myfile
 if [ $myfile = 'SKIP' ]
 then
 	func_commit
+elif [ $myfile = 'EXIT' ]
+then
+	exit
 else
 	git add $myfile
 	func_commit
