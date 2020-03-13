@@ -1,0 +1,19 @@
+echo "git add: " && read myfile
+git add $myfile
+echo  "commit: "
+read mymessage
+git commit -m "$mymessage"
+clear
+git status
+echo "push? [y/n]"
+read myconfirmation
+if [ $myconfirmation = 'y' ] || [ $myconfirmation = 'Y' ] || [ $myconfirmation = 'yes' ] || [ $myconfirmation = 'Yes' ]
+then
+		echo "Attempting push\n"
+		git push origin master
+		git log
+elif [ $myconfirmation = 'n' ] || [ $myconfirmation = 'N' ] || [ $myconfirmation = 'no' ] || [ $myconfirmation = 'No' ]
+then
+		echo "not pushed\n"
+		git reset $myfile
+fi
