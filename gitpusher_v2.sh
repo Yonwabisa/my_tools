@@ -6,6 +6,15 @@ func_commit()
 {
 echo "commit: "
 read mymessage
+if [ $mymessage = 'EXIT' ]
+then
+	exit
+elif [$mymessage = 'SKIP' ]
+then
+	echo You can only skip the \'git add\' stage
+	echo Your message will now be taken word-for-word
+	read mymessage
+fi
 git commit -m "$mymessage"
 }
 
@@ -50,5 +59,6 @@ then
 elif [ $myconfirmation = 'n' ] || [ $myconfirmation = 'N' ] || [ $myconfirmation = 'no' ] || [ $myconfirmation = 'No' ]
 then
 		echo "not pushed\n"
-		git reset $myfile
+		git reset --soft HEAD^ 		#REMOVES COMMIT MESSAGE
+		git reset HEAD			#UNSTAGES (REMOVES FILE FROM HEAD INDEX)
 fi
