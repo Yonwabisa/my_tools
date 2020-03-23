@@ -41,7 +41,7 @@ clear
 
 date
 pwd
-ls -a -l
+ls -a -lh
 
 git status
 
