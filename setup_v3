@@ -1,0 +1,7 @@
+#!/bin/bash
+echo "mv ./gitpusher_v3.sh /usr/bin/
+export PSH=\"sh /usr/bin/gitpusher_v3.sh\"
+alias psh=\"\$PSH\"" > temp1.sh
+source ./temp1.sh
+rm ./temp1.sh
+clear && ls
