@@ -1,12 +1,3 @@
-func_mkglobal()
-{
-cp ./gitpusher_v3.sh /dev
-echo "cp ./gitpusher_v3.sh /dev"
-export my_var="sh /dev/gitpusher_v3.sh"
-echo "export my_var=\"sh /dev/gitpusher_v3.sh\""
-alias psh="$my_var"
-}
-
 DULL='\033[0m'
 GREEN='\033[5;32m'
 CYAN='\033[5;36m'
@@ -54,8 +45,6 @@ pwd
 ls -a -lh
 
 git status
-
-func_mkglobal
 
 func_add
 
