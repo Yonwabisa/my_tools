@@ -1,0 +1,10 @@
+#!/bin/bash
+echo "environment variable found:"
+env | grep -c -e "^MKDPP."
+if [ -f /usr/bin/mkdir++ ]
+then
+	echo "file found in binaries"
+else
+	echo "file not found in binares"
+fi
+echo "done"

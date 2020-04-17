@@ -1,0 +1,8 @@
+#!/bin/bash
+echo "unset MKDPP
+mv /usr/bin/mkdir++ .
+alias mkdpp=\"echo this alias has been cleared and is reserved\"" > temp2.sh
+. ./temp2.sh
+rm ./temp2.sh
+clear
+ls
