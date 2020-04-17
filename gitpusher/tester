@@ -1,6 +1,0 @@
-#!/bin/bash
-env | grep -e "^PSH."
-echo "environment variables found:"
-env | grep -c -e "^PSH."
-find /usr/bin/gitpusher_v3.sh -print
-echo "done"

@@ -1,6 +1,6 @@
 #!/bin/bash
 echo "mv ./mkdir++ /usr/bin/
-export MDPP=\". /usr/bin/mkdir++\"
+export MKDPP=\". /usr/bin/mkdir++\"
 alias mkdpp=\"\$MKDPP\"" > temp1.sh
 source ./temp1.sh
 rm ./temp1.sh

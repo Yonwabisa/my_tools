@@ -1,0 +1,14 @@
+#!/bin/bash
+if [ ! $(env | grep -c -e "^PSH.") -eq 0 ]
+then
+	status=true
+else
+	status=false
+fi
+echo environment variable found: $status
+if [ -f /usr/bin/gitpusher_v3.sh ]
+then
+	echo script succeccfully placed in /usr/bin
+else
+	echo script not found in /usr/bin
+fi
