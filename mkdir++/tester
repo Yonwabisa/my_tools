@@ -5,10 +5,12 @@ then
 	status=true
 fi
 echo "environment variable found: $status"
+status=false
 if [ -f /usr/bin/mkdir++ ]
 then
-	echo "file found in binaries"
+	echo "file found in binaries: $status"
 else
-	echo "file not found in binares"
+	status=false
+	echo "file found in binaresi: $status"
 fi
-echo "done"
+echo "script end"
