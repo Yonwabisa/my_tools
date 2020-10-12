@@ -1,0 +1,39 @@
+#!/usr/bin/python3
+import webbrowser
+
+chrome = webbrowser.get('Google-Chrome')
+pages = {
+'Curriculum': 'https://curriculum.wethinkcode.co.za/',
+'Calendar': 'https://calendar.google.com/calendar/u/0/r?tab=mc&pli=1',
+'Email': 'https://mail.google.com/mail',
+'Slack': 'https://app.slack.com/client/T016EBFH7F0/G019CQDATDJ',
+'Spotify': 'https://open.spotify.com/?utm_source=pwa_install'
+}
+
+show_html = False
+
+log_html = '''<html>
+<head>
+	<title> Web pages That failed to open</title>
+</head>
+
+<body>
+'''
+
+for page in pages.keys():
+	status = chrome.open_new_tab(pages[page])
+	print(f'This is your status for {page}: {status}')
+	if not status:
+		log_html += '\n<h1>' + page + '</h1>'
+		show_html = True
+
+log_html += '''</body>
+</html>
+'''
+if show_html:
+	with open('/tmp/log_html.html', 'w+') as my_log:
+		my_log.write(log_html)
+	chrome.open_new_tab('file:///tmp/log_html.html')
+
+if __name__ == "__main__":
+	print('This was run as a script')
