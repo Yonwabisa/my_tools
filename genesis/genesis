@@ -2,7 +2,7 @@
 
 sub_genesis
 echo Chrome Started$'\n'Starting VS Code
-code `ls ~/problems -t1 | cut -d $'\n' -f 1`/
+code ~/problems/`ls ~/problems -t1 | cut -d $'\n' -f 1`/
 echo VS Code started$'\n'Starting Terminals
 x-terminal-emulator
 x-terminal-emulator
