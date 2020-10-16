@@ -1,8 +1,10 @@
+alias now="date | cut -d ' ' -f 4"
 alias test='clear; python3 -m unittest tests/test_main.py'
 alias ls='ls --color=auto'
 alias cls='clear; ls'
 alias cla='clear; ls -la1'
 alias py='python3'
+alias pip='pip3'
 alias run='clear;py'
 alias ..='cd ..'
 
