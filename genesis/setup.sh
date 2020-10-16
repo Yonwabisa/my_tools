@@ -7,6 +7,8 @@ if [[ -d $HOME/bin ]]; then
 else
     echo 'creating bin directory in $HOME'
     mkdir $HOME/bin 
+    echo 'Copying genesis to bin'
+    cp genesis sub_genesis $HOME/bin
 fi
 
 word='differ'
