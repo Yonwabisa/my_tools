@@ -13,7 +13,8 @@ pages = {
 
 music_player =  {
 	'spotify': 'https://open.spotify.com/?utm_source=pwa_install',
-	'apple_music': 'https://music.apple.com/za/listen-now'
+	'apple_music': 'https://music.apple.com/za/listen-now',
+	'youtube_music': 'https://music.youtube.com/'
 }
 
 #value to be overwritten using sed from genesis script
@@ -21,7 +22,7 @@ prefered_music_player = ()
 
 #user input formatting
 user_choice = re.split('\.|-| |\?', prefered_music_player)
-user_choice = '_'.join(prefered_music_player)
+user_choice = '_'.join(user_choice)
 user_choice = user_choice.lower()
 
 show_html = False
@@ -42,7 +43,7 @@ for page in pages.keys():
 		show_html = True
 
 unsupported_msg = f'The music player {user_choice} is unsupported'
-chrome.open_new_tab(music_player.get(user_choice, unsupported_msg)
+chrome.open_new_tab(music_player.get(user_choice, unsupported_msg))
 
 log_html += '''</body>
 </html>
@@ -51,6 +52,3 @@ if show_html:
 	with open('/tmp/log_html.html', 'w+') as my_log:
 		my_log.write(log_html)
 	chrome.open_new_tab('file:///tmp/log_html.html')
-
-if __name__ == "__main__":
-	print('This was run as a script')
