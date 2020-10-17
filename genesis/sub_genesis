@@ -21,7 +21,7 @@ music_player =  {
 prefered_music_player = ()
 
 #user input formatting
-user_choice = re.split('\.|-| |\?', prefered_music_player)
+user_choice = re.split(',|\.|-| |\?', prefered_music_player)
 user_choice = '_'.join(user_choice)
 user_choice = user_choice.lower()
 
