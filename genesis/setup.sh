@@ -2,6 +2,11 @@
 
 # Check if the bin folder exists in the home directory
 # WeThinkCode Macs already have ~/bin in the $PATH
+echo Enter your music player of choice e.g spotify/apple_music
+read music_player
+sed 's/\["spotify"/["$music_player"/g' -i $HOME/bin/sub_genesis
+#sed 's/\["spotify"\]/["$music_player"]/g' -i $HOME/bin/sub_genesis
+
 if [[ -d $HOME/bin ]]; then
     echo bin folder found
 else

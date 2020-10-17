@@ -1,14 +1,27 @@
 #!/usr/bin/python3
 import webbrowser
 
+
 chrome = webbrowser.get('Google-Chrome')
 pages = {
 'Curriculum': 'https://curriculum.wethinkcode.co.za/',
 'Calendar': 'https://calendar.google.com/calendar/u/0/r?tab=mc&pli=1',
 'Email': 'https://mail.google.com/mail',
 'Slack': 'https://app.slack.com/client/T016EBFH7F0/G019CQDATDJ',
-'Spotify': 'https://open.spotify.com/?utm_source=pwa_install'
+# 'spotify': 'https://open.spotify.com/?utm_source=pwa_install'
+}	
+
+music_player =  {
+	'spotify': 'https://open.spotify.com/?utm_source=pwa_install',
+	'apple_music': 'https://music.apple.com/za/listen-now'
 }
+
+#value to be overwritten using sed from genesis script
+prefered_music_player = ''
+
+#user input formatting
+user_choice = '_'.join(prefered_music_player.split())
+user_choice = user_choice.lower()
 
 show_html = False
 
@@ -26,6 +39,10 @@ for page in pages.keys():
 	if not status:
 		log_html += '\n<h1>' + page + '</h1>'
 		show_html = True
+
+unsupported_msg = f'The music player {user_choice} is unsupported'
+chrome.open_new_tab(music_player.get(user_choice, unsupported_msg)
+chrome.open_new_tab(music_player[user_choice])
 
 log_html += '''</body>
 </html>
