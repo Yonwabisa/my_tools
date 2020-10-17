@@ -4,8 +4,7 @@
 # WeThinkCode Macs already have ~/bin in the $PATH
 echo Enter your music player of choice e.g spotify/apple_music
 read music_player
-sed 's/\["spotify"/["$music_player"/g' -i $HOME/bin/sub_genesis
-#sed 's/\["spotify"\]/["$music_player"]/g' -i $HOME/bin/sub_genesis
+sed 's/prefered_music_player = ()/prefered_music_player = "$music_player"/g' -i $HOME/bin/sub_genesis
 
 if [[ -d $HOME/bin ]]; then
     echo bin folder found
