@@ -3,8 +3,7 @@
 # Check if the bin folder exists in the home directory
 # WeThinkCode Macs already have ~/bin in the $PATH
 echo Enter your music player of choice e.g spotify/apple_music
-read music_player
-sed 's/prefered_music_player = ()/prefered_music_player = "$music_player"/g' -i $HOME/bin/sub_genesis
+read MUSIC_PLAYER
 
 if [[ -d $HOME/bin ]]; then
     echo bin folder found
@@ -30,3 +29,5 @@ do
         echo "$script is up to date"
     fi
 done
+
+sed "s/prefered_music_player = ()/prefered_music_player = \"$MUSIC_PLAYER\"/g" -i $HOME/bin/sub_genesis
