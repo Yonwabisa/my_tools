@@ -9,6 +9,8 @@ pages = {
 'Calendar': 'https://calendar.google.com/calendar/u/0/r?tab=mc&pli=1',
 'Email': 'https://mail.google.com/mail',
 'Slack': 'https://app.slack.com/client/T016EBFH7F0/G019CQDATDJ',
+'Youtube': 'https://www.youtube.com/',
+'Google Meets': 'https://meet.google.com/'
 }	
 
 music_player =  {
@@ -42,8 +44,8 @@ for page in pages.keys():
 		log_html += '\n<h1>' + page + '</h1>'
 		show_html = True
 
-unsupported_msg = f'The music player {user_choice} is unsupported'
-chrome.open_new_tab(music_player.get(user_choice, unsupported_msg))
+if user_choice and user_choice in music_player.keys():
+	chrome.open_new_tab(music_player.get(user_choice))
 
 log_html += '''</body>
 </html>
