@@ -1,0 +1,40 @@
+#!/bin/zsh
+
+install_debian_dependancies(){
+    sudo apt install build-essential cmake vim-nox python3-dev -y
+    sudo apt install mono-complete golang nodejs default-jdk npm -y
+    sudo apt insall vim -y
+}
+
+install_vim_plug(){
+# installing vim plugin manager
+
+    curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+}
+
+clone_git_vimrc(){
+# cloning my_tools from git
+
+    git clone https://github.com/yonwabisa/my_tools
+    mv ./my_tools/.vimrc $HOME/
+    rm -rf ./my_tools
+    #source $HOME/.vim/plugged/YouCompleteMe/install.py -all
+    $HOME/.vim/plugged/YouCompleteMe/install.py -all
+    vim -c PlugInstall
+}
+
+install_and_setup_fish(){
+# installing and setting up fish an oh my fish
+
+    sudo apt install fish -y
+    curl -L https://get.oh-my.fish | fish
+    fish -c "omf install chain"
+    fish -c "omf install xsel"
+    fish -c "omf install bang-bang"
+}
+
+install_and_setup_fish
+install_debian_dependancies
+install_vim_plug
+sudo apt autoremove -y
