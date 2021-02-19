@@ -3,7 +3,7 @@
 install_debian_dependancies(){
     sudo apt install build-essential cmake vim-nox python3-dev -y
     sudo apt install mono-complete golang nodejs default-jdk npm -y
-    sudo apt install vim -y
+    sudo apt install vim -y || sudo apt upgade vim -y
 }
 
 install_vim_plug(){
@@ -19,7 +19,7 @@ clone_git_vimrc(){
     git clone https://github.com/yonwabisa/my_tools
     mv ./my_tools/.vimrc $HOME/
     rm -rf ./my_tools
-    #source $HOME/.vim/plugged/YouCompleteMe/install.py -all
+    source $HOME/.vim/plugged/YouCompleteMe/install.py -all
     $HOME/.vim/plugged/YouCompleteMe/install.py -all
     vim -c PlugInstall
 }
