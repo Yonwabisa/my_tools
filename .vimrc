@@ -22,7 +22,6 @@ Plug 'morhetz/gruvbox'                              " a colorscheme
 Plug 'sonph/onehalf'                                " a colorscheme
 Plug 'jremmen/vim-ripgrep'                          " a fast grep
 Plug 'vim-utils/vim-man'
-"Plug 'git@github.com:kien/ctrlp.vim.git'            " a file finder
 Plug 'https://github.com/kien/ctrlp.vim.git'            " a file finder
 Plug 'https://github.com/Valloric/YouCompleteMe.git'
 Plug 'mbbill/undotree'
