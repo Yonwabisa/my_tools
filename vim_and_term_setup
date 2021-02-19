@@ -22,13 +22,14 @@ clone_git_vimrc(){
     source $HOME/.vim/plugged/YouCompleteMe/install.py -all
     $HOME/.vim/plugged/YouCompleteMe/install.py -all
     vim -c PlugInstall
+    vim -c 'qa!'
 }
 
 install_and_setup_fish(){
 # installing and setting up fish an oh my fish
 
     sudo apt install fish -y
-    curl -L https://get.oh-my.fish | fish
+    curl -L https://get.oh-my.fish
     fish -c "omf install chain"
     fish -c "omf install xsel"
     fish -c "omf install bang-bang"
@@ -39,3 +40,4 @@ install_debian_dependancies
 install_vim_plug
 clone_git_vimrc
 sudo apt autoremove -y
+reset
