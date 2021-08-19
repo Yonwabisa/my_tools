@@ -1,0 +1,5 @@
+#!/usr/bin/zsh
+for pm in dnf brew yarn npm snap flatpak
+do
+echo "$pm:";$pm search $1
+done
