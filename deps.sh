@@ -60,6 +60,9 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$
 # Installing imagemagick
 sudo dnf install -y Imagemagick
 
+cp ./.p10k.zsh $HOME
+cp ./.zshrc $HOME
+
 # #==========================================================================================================================================================
 # Editors and other extras.. and stuff
 
