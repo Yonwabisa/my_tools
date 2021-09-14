@@ -9,7 +9,7 @@ fi
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/yonwabisa/.oh-my-zsh"
+export ZSH="/home/$USER/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -82,7 +82,6 @@ plugins=(
 	git
 	web-search
 	powify
-	autojump
 	zsh-autosuggestions
 	sudo
 	themes
@@ -128,15 +127,10 @@ alias py='python3'
 alias pip='pip3'
 alias testpy='clear; python3 -m unittest tests/test_main.py'
 alias activate='. `find -path "*/bin/activate"`' #finds and activates a virtual env in current tree, where the pwd is the root
-alias monitor_1='xrandr --output DVI-D-0 --brightness'
-alias monitor_2='xrandr --output HDMI-A-0 --brightness'
 
 
 autoload -U promptinit; promptinit
-prompt pure
-
-export PATH="$PATH:/flutter/bin"
-export PATH="$PATH:/usr/lib64/"
+prompt fade
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -145,8 +139,8 @@ if [ -x "$(command -v fzf)"  ]
 then
 	source /usr/share/fzf/shell/key-bindings.zsh
 fi
+(( ! ${+functions[p10k]} )) || p10k finalize
 
-export ZPLUG_HOME=/home/linuxbrew/.linuxbrew/opt/zplug
-source $ZPLUG_HOME/init.zsh
-ssh-add $HOME/.ssh/gitlabSchool
-ssh-add $HOME/bin/.ssh/git_0
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
