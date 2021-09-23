@@ -63,6 +63,9 @@ sudo dnf install -y Imagemagick
 cp ./.p10k.zsh $HOME
 cp ./.zshrc $HOME
 
+sudo dnf install -y i3 i3status dmenu i3lock xbacklight feh conky picom xrandr
+sudo dnf install -y python-dbus dunst xset
+
 # #==========================================================================================================================================================
 # Editors and other extras.. and stuff
 
@@ -88,3 +91,4 @@ sudo dnf install -y snapd
 sudo ln -s /var/lib/snapd/snap /snap
 
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
