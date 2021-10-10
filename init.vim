@@ -3,8 +3,14 @@ set number
 set incsearch
 set nowrap
 set nowrapscan
+set termguicolors
 let mapleader = " "
-let g:airline_theme='onehalfdark'
+let g:lightline = { 'colorscheme': 'nightfly' }
+let g:nightflyCursorColor = 1
+let g:nightflyTransparent = 1
+let g:nightflyUnderlineMatchParen = 1
+let g:nightflyVertSplits = 0
+let g:colorizer_auto_color = 1
 nnoremap <C-h> <C-w>h<CR>
 nnoremap <C-j> <C-w>j<CR>
 nnoremap <C-k> <C-w>k<CR>
@@ -24,14 +30,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
 " ---------------------------------------------------------------
 
-" --------------------------telescope--------------------------
-
-Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-
-" -------------------------------------------------------------
-
 " A File explorer
 Plug 'preservim/nerdtree'
 
@@ -41,18 +39,14 @@ Plug 'tpope/vim-surround'
 " Airline info footer
 Plug 'bling/vim-airline'
 
-Plug 'sonph/onehalf', {'rtp': 'vim/'}
+" A theme based on the vsCode nightOwl
+Plug 'bluz71/vim-nightfly-guicolors'
 
-" Typescript syntax highlighting
-" Plug 'HerringtonDarkholme/yats.vim'
-Plug 'leafgarland/typescript-vim'
+" A floating terminal
+Plug 'voldikss/vim-floaterm'
 
-" JavaScript syntax highlighting
-Plug 'yuezk/vim-js'
-
-" Jsx syntax highlighting
-Plug 'maxmellon/vim-jsx-pretty'
-
+" A xolor code highlighter
+Plug 'chrisbra/Colorizer'
 
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(1) } }
 
@@ -71,16 +65,14 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-" Using lua functions
-nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
-nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
-nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
-nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
-
 nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
+
+" Open a new floating terminal | teminal running lf
+nnoremap <leader>t :FloatermNew<CR>
+nnoremap <leader>l :FloatermNew lf<CR>
 
 " Exit Vim if NERDTree is the only window left.
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
@@ -96,5 +88,4 @@ autocmd BufWinEnter * silent NERDTreeMirror
 let g:NERDTreeDirArrowExpandable = ''
 let g:NERDTreeDirArrowCollapsible = ''
 
-
-colorscheme onehalfdark
+colorscheme nightfly
