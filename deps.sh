@@ -8,12 +8,23 @@ ln -sfT dash /usr/bin/sh
 
 # kitty terminal
 curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+# Create a symbolic link to add kitty to PATH (assuming ~/.local/bin is in your PATH)
+ln -s ~/.local/kitty.app/bin/kitty ~/.local/bin/
+# Place the kitty.desktop file somewhere it can be found by the OS
+cp ~/.local/kitty.app/share/applications/kitty.desktop ~/.local/share/applications/
+# Update the path to the kitty icon in the kitty.desktop file
+sed -i "s|Icon=kitty|Icon=/home/$USER/.local/kitty.app/share/icons/hicolor/256x256/apps/kitty.png|g" ~/.local/share/applications/kitty.desktop
 
 #==========================================================================================================================================================
 # More Fedora repositories
 
+#rpm fusion
 sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm -y
 sudo dnf install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm -y
+
+#albert
+sudo rpm --import "https://build.opensuse.org/projects/home:manuelschneid3r/public_key"
+sudo dnf config-manager --add-repo https://download.opensuse.org/repositories/home:manuelschneid3r/Fedora_34/home:manuelschneid3r.repo
 
  
 # #==========================================================================================================================================================
@@ -27,17 +38,20 @@ sudo dnf group upgrade --with-optional Multimedia -y
 # #==========================================================================================================================================================
 # Drivers and stuff
  
-sudo dnf install 'wireless-tools' -y
-sudo dnf install kmod-wl -y
-sudo dnf groupinstall "Development Tools" -y
-sudo dnf groupinstall "C Development Tools and Libraries" -y
-sudo dnf install elfutils-libelf-devel unzip -y
-sudo dnf install dkms kernel-devel kernel-headers -y
-sudo dnf install lshw -y
+#sudo dnf install 'wireless-tools' -y
+#sudo dnf install kmod-wl -y
+#sudo dnf groupinstall "Development Tools" -y
+#sudo dnf groupinstall "C Development Tools and Libraries" -y
+#sudo dnf install elfutils-libelf-devel unzip -y
+#sudo dnf install dkms kernel-devel kernel-headers -y
+#sudo dnf install lshw -y
  
  
 # #==========================================================================================================================================================
 # Ricing and stuff
+
+# albert with picom for a clean finish
+sudo dnf install -y picom albert
 
 # download and install omz
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -62,9 +76,6 @@ sudo dnf install -y Imagemagick
 
 cp ./.p10k.zsh $HOME
 cp ./.zshrc $HOME
-
-sudo dnf install -y i3 i3status dmenu i3lock xbacklight feh conky picom xrandr
-sudo dnf install -y python-dbus dunst xset
 
 # #==========================================================================================================================================================
 # Editors and other extras.. and stuff
@@ -91,4 +102,3 @@ sudo dnf install -y snapd
 sudo ln -s /var/lib/snapd/snap /snap
 
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-

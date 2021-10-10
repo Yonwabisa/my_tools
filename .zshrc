@@ -87,6 +87,8 @@ plugins=(
 	themes
 	zsh-interactive-cd
 	zsh-completions
+	docker
+	zsh_reload
 )
 
 source $ZSH/oh-my-zsh.sh
