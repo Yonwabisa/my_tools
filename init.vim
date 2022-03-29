@@ -4,6 +4,8 @@ set incsearch
 set nowrap
 set nowrapscan
 set termguicolors
+set undodir=$HOME/.config/nvim/undo
+set undofile
 let mapleader = " "
 let g:lightline = { 'colorscheme': 'nightfly' }
 let g:nightflyCursorColor = 1
@@ -29,6 +31,9 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Build from source code by using yarn: https://yarnpkg.com
 " Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
 " ---------------------------------------------------------------
+
+" Kitty-Vim navigator
+Plug 'knubie/vim-kitty-navigator'
 
 " A File explorer
 Plug 'preservim/nerdtree'
