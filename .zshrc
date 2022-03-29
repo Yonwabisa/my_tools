@@ -68,7 +68,7 @@ ENABLE_CORRECTION="true"
 # "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 # or set a custom format using the strftime function format specifications,
 # see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
+# HIST_STAMPS="dd/mm/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -80,6 +80,7 @@ ENABLE_CORRECTION="true"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
 	git
+	extract
 	web-search
 	powify
 	zsh-autosuggestions
@@ -88,7 +89,8 @@ plugins=(
 	zsh-interactive-cd
 	zsh-completions
 	docker
-	zsh_reload
+	docker-compose
+	dotnet
 )
 
 source $ZSH/oh-my-zsh.sh
