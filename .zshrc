@@ -6,7 +6,11 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+ export PATH=$HOME/.local/bin:$HOME/bin:/usr/local/bin:$PATH
+
+ export PATH=$PATH:/home/lithelihle/snap/flutter/common/flutter
+
+ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/$USER/.oh-my-zsh"
@@ -68,7 +72,7 @@ ENABLE_CORRECTION="true"
 # "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 # or set a custom format using the strftime function format specifications,
 # see 'man strftime' for details.
-# HIST_STAMPS="dd/mm/yyyy"
+# HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -80,17 +84,22 @@ ENABLE_CORRECTION="true"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
 	git
-	extract
+	sudo
 	web-search
 	powify
 	zsh-autosuggestions
-	sudo
-	themes
 	zsh-interactive-cd
 	zsh-completions
+	themes
+	extract
+	fzf
 	docker
 	docker-compose
+	sdk
+	flutter
+	fancy-ctrl-z
 	dotnet
+	postgres
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -124,13 +133,16 @@ alias vim=nvim
 alias icat="kitty +kitten icat"
 alias d="kitty +kitten diff"
 alias clipboard="kitty +kitten clipboard"
-alias cls='clear; ls'
-alias cla='clear; ls -la1'
+alias ls='lsd'
+alias cls='clear; lsd'
+alias cla='clear; lsd -la1'
 alias bpy='bpython'
 alias py='python3'
 alias pip='pip3'
 alias testpy='clear; python3 -m unittest tests/test_main.py'
 alias activate='. `find -path "*/bin/activate"`' #finds and activates a virtual env in current tree, where the pwd is the root
+alias dirs='dirs -v'
+alias lyrics='npx lyrics-finder'
 
 
 autoload -U promptinit; promptinit
@@ -139,10 +151,10 @@ prompt fade
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-if [ -x "$(command -v fzf)"  ]
-then
-	source /usr/share/fzf/shell/key-bindings.zsh
-fi
+#if [ -x "$(command -v fzf)"  ]
+#then
+#	source /usr/share/fzf/shell/key-bindings.zsh
+#fi
 (( ! ${+functions[p10k]} )) || p10k finalize
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
