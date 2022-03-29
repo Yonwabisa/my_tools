@@ -9,6 +9,7 @@ ln -sfT dash /usr/bin/sh
 # kitty terminal
 curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
 # Create a symbolic link to add kitty to PATH (assuming ~/.local/bin is in your PATH)
+sudo mkdir -p ~/.local/bin
 ln -s ~/.local/kitty.app/bin/kitty ~/.local/bin/
 # Place the kitty.desktop file somewhere it can be found by the OS
 cp ~/.local/kitty.app/share/applications/kitty.desktop ~/.local/share/applications/
@@ -72,7 +73,7 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$
 
 
 # Installing imagemagick
-sudo dnf install -y Imagemagick
+sudo dnf install -y ImageMagick
 
 cp ./.p10k.zsh $HOME
 cp ./.zshrc $HOME
@@ -83,7 +84,21 @@ cp ./.zshrc $HOME
 yes | sudo dnf copr enable agriffis/neovim-nightly
 sudo dnf install -y neovim python3-neovim
 
-sudo dnf -y install npm
+# installing npm
+
+sudo dnf install -y  npm
+
+# make cache folder (if missing) and take ownership
+sudo mkdir -p /usr/local/n
+sudo chown -R $(whoami) /usr/local/n
+# make sure the required folders exist (safe to execute even if they already exist)
+sudo mkdir -p /usr/local/bin /usr/local/lib /usr/local/include /usr/local/share
+# take ownership of Node.js install destination folders
+sudo chown -R $(whoami) /usr/local/bin /usr/local/lib /usr/local/include /usr/local/share
+
+npm install -g n
+npm install -g typescript
+#npm install -g @angular/cli
 
 # Neovim vim-plug
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
@@ -92,11 +107,10 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 curl -s "https://get.sdkman.io" | bash
 source "$HOME/.sdkman/bin/sdkman-init.sh"
 
-yes | ssh-keygen -t rsa -b 8192 -f gitLab -N ''
 mkdir ~/.ssh
-mv ./gitLab ~/.ssh/
-mv ./gitLab.pub ~/.ssh/
-
+pushd $HOME/.ssh
+yes | ssh-keygen -t rsa -b 8192 -f git -N ''
+popd
 
 sudo dnf install -y snapd
 sudo ln -s /var/lib/snapd/snap /snap
