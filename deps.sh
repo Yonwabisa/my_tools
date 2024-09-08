@@ -65,23 +65,8 @@ sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub
 
 git clone https://github.com/nwg-piotr/autotiling.git
 chmod +x ./autotiling/main.py
+mkdir -p ~/.bin
 mv ./autotiling/main.py ~/.bin/autotiling
 
-pip install --user bumblebee-status
-sudo dnf install -y dunst gnome-system-monitor python-pulsectl xset
+git clone https://gitlab.com/wef/dotfiles.git other-dotfiles
 
-
-# Get Homebrew
-
-git clone https://github.com/Homebrew/install.git
-/bin/bash -c ./install/install.sh
-(echo; echo eval export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew";
-export HOMEBREW_CELLAR="/home/linuxbrew/.linuxbrew/Cellar";
-export HOMEBREW_REPOSITORY="/home/linuxbrew/.linuxbrew/Homebrew";
-export PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin${PATH+:$PATH}";
-export MANPATH="/home/linuxbrew/.linuxbrew/share/man${MANPATH:$MANPATH};";
-export INFOPATH="/home/linuxbrew/.linuxbrew/share/infor:${INFOPATH:-}";) >> /home/$USER/.zprofile
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-
-# Getting nice terminal theme-ey stuff from brew
-brew install lsd
