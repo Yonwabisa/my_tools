@@ -1,14 +1,14 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+#if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+#fi
 
 # If you come from bash you might have to change your $PATH.
  export PATH=$HOME/.local/bin:$HOME/bin:/usr/local/bin:$PATH
 
- export PATH=$PATH:/home/lithelihle/snap/flutter/common/flutter
+ export PATH=$PATH:${HOME}/snap/flutter/common/flutter:$PATH:${HOME}/.npm-packages/bin
 
  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
@@ -84,8 +84,8 @@ ENABLE_CORRECTION="true"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
 	git
+	git-auto-fetch
 	sudo
-	web-search
 	powify
 	zsh-autosuggestions
 	zsh-interactive-cd
@@ -93,13 +93,22 @@ plugins=(
 	themes
 	extract
 	fzf
+	mvn
 	docker
 	docker-compose
+	kubectl
+	helm
 	sdk
-	flutter
 	fancy-ctrl-z
-	dotnet
-	postgres
+	dnf
+	spring
+	kitty
+	gpg-agent
+	ssh-agent
+	httpie
+	aws
+  terraform
+  npm
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -133,7 +142,7 @@ alias vim=nvim
 alias icat="kitty +kitten icat"
 alias d="kitty +kitten diff"
 alias clipboard="kitty +kitten clipboard"
-alias ls='lsd'
+alias ls='lsd -lAthF --blocks name,git,permission,size,date'
 alias cls='clear; lsd'
 alias cla='clear; lsd -la1'
 alias bpy='bpython'
@@ -144,9 +153,9 @@ alias activate='. `find -path "*/bin/activate"`' #finds and activates a virtual 
 alias dirs='dirs -v'
 alias lyrics='npx lyrics-finder'
 
-
 autoload -U promptinit; promptinit
 prompt fade
+
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -160,3 +169,5 @@ prompt fade
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+neofetch
