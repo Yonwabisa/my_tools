@@ -8,7 +8,7 @@
 # If you come from bash you might have to change your $PATH.
  export PATH=$HOME/.local/bin:$HOME/bin:/usr/local/bin:$PATH
 
- export PATH=$PATH:${HOME}/snap/flutter/common/flutter:$PATH:${HOME}/.npm-packages/bin
+ export PATH=$PATH:$PATH:${HOME}/.npm-packages/bin
 
  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
@@ -33,7 +33,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Uncomment the following line to use hyphen-insensitive completion.
 # Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
+HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
@@ -94,10 +94,13 @@ plugins=(
 	extract
 	fzf
 	mvn
+  podman
 	docker
 	docker-compose
 	kubectl
+  kubectx
 	helm
+  argocd
 	sdk
 	fancy-ctrl-z
 	dnf
@@ -107,10 +110,13 @@ plugins=(
 	ssh-agent
 	httpie
 	aws
-  terraform
+  opentofu
+  ansible
   npm
+  ng
 )
 
+zstyle :omz:plugins:ssh-agent identities git aws
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -140,6 +146,7 @@ fi
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias vim=nvim
 alias icat="kitty +kitten icat"
+alias ssh="kitty +kitten ssh"
 alias d="kitty +kitten diff"
 alias clipboard="kitty +kitten clipboard"
 alias ls='lsd -lAthF --blocks name,git,permission,size,date'
@@ -170,4 +177,14 @@ prompt fade
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
-neofetch
+fastfetch
+
+
+# Load Angular CLI autocompletion.
+source <(ng completion script)
+
+export PATH=$PATH:/home/lithelihle/.spicetify
+
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+export PATH="${HOME}/.rd/bin:$PATH"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
