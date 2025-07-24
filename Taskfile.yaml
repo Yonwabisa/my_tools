@@ -1,0 +1,124 @@
+version: '3'
+
+env:
+  SSH_DIR: "{{.HOME}}/.ssh"
+
+tasks:
+  setup_shell:
+    name: setup zsh
+    description: install oh-my-zsh, and some basic magical plugins, and install a font (without setting it up)
+    platforms: [darwin, linux]
+    cmds:
+      - task: install_oh_my_zsh
+      - task: install_zsh_autosuggestions
+      - task: install_zsh_completions
+      - task: install_fzf
+      - task: install_powerlevel10k
+
+  install_oh_my_zsh:
+      internal: true
+      name: install oh-my-zsh
+      description: install oh-my-zsh
+      platforms: [darwin, linux]
+      cmd: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+      generates:
+        - "{{.HOME}}/.oh-my-zsh"
+
+  install_zsh_autosuggestions:
+      internal: true
+      name: install zsh-autosuggestions
+      description: install zsh-autosuggestions
+      platforms: [darwin, linux]
+      cmd: git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+      generates:
+        - "{{.HOME}}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+
+  install_zsh_completions:
+      internal: true
+      name: install zsh completions
+      description: install zsh-completions
+      platforms: [darwin, linux]
+      cmd: git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:=~/.oh-my-zsh/custom}/plugins/zsh-completions
+      generates:
+        - "{{.HOME}}/.oh-my-zsh/custom/plugins/zsh-completions"
+        
+  install_fzf:
+      internal: true
+      name: install fuzzy finder
+      description: install fzf
+      platforms: [darwin, linux]
+      cmds:
+        - git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+        - ~/.fzf/install
+      generates:
+        - "{{.HOME}}/.fzf"
+        
+  install_powerlevel10k:
+      internal: true
+      name: install powerlevel10k
+      description: install powerlevel10k
+      platforms: [darwin, linux]
+      cmd: git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+      generates:
+        - "{{.HOME}}/.oh-my-zsh/custom/themes/powerlevel10k"
+
+  
+  setup_dev_tools:
+    name: creates ssh-keys, and installs dev programs
+    description: creates ssh keys, and installs various programs that make dev easier.
+    platforms: [darwin, linux]
+    cmds:
+      - task: generate_ssh_key
+      - task: install_sdkman
+      - task: install_brew_packages
+
+  install_sdkman:
+    name: install sdkman
+    description: install sdkman
+    platforms: [darwin, linux]
+    cmds:
+      - curl -s "https://get.sdkman.io" | bash
+      - source "$HOME/.sdkman/bin/sdkman-init.sh"
+    generates:
+      - "{{.HOME}}/.sdkman"
+
+  install_homebrew:
+    internal: true
+    name: install brew
+    description: install brew
+    platforms:
+      - darwin
+      - linux
+    cmd: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    generates:
+      - "{{.HOME}}/.brew"
+
+  install_brew_packages:
+    name: install brew packages
+    description: install brew packages
+    platforms: [darwin, linux]
+    deps: [install_homebrew]
+    vars:
+      BREW_PACKAGES:  fzf ghostty bruno lsd locust
+    cmds: 
+      - cmd: brew install --cask font-meslo-lg-nerd-font
+      - for: { var: BREW_PACKAGES, as: package }
+        cmd: brew install {{.package}}
+    # status:
+    #   - for: { var: BREW_PACKAGES, as package }
+    #     test `brew list -1 --installed-on-request | grep -w {{.package}} | wc -l` -eq 1
+
+  generate_ssh_key:
+    internal: true
+    name: generate ssh key
+    description: generate ssh key
+    platforms: [darwin, linux]
+    requires:
+      vars: [ SSH_DIR ]
+    cmds: 
+      - ssh-keygen -t rsa -b 8192 -f {{.SSH_DIR}}/id_rsa -N ''
+      - chmod 600 {{.SSH_DIR}}/id_rsa
+      - chmod 644 {{.SSH_DIR}}/id_rsa.pub
+    generates:
+      - "{{.SSH_DIR}}/id_rsa"
+      - "{{.SSH_DIR}}/id_rsa.pub"
